@@ -1,0 +1,49 @@
+/* ══════════════════════════════════════════════════════════════
+   CLONE HUNT: HIDE & SEEK — variables.css
+   Design tokens: colors, fonts, spacing, motion.
+   ══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  /* ── Colors ─────────────────────────────────────────────── */
+  --bg-void: #0a0a12;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+
+  --purple-clone: #a78bfa;
+  --purple-deep: #7c3aed;
+  --purple-glow: rgba(138, 92, 246, 0.4);
+
+  --green-toxic: #06d6a0;
+  --green-glow: rgba(6, 214, 160, 0.3);
+
+  --red-danger: #ef4444;
+  --red-glow: rgba(239, 68, 68, 0.5);
+
+  --amber-warn: #f59e0b;
+
+  --text-primary: #e0e0f0;
+  --text-muted: #8888aa;
+  --text-dim: #555570;
+
+  /* ── Fonts ──────────────────────────────────────────────── */
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* ── Spacing scale ──────────────────────────────────────── */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* ── Motion ─────────────────────────────────────────────── */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 0.25s;
+
+  /* ── Layout ─────────────────────────────────────────────── */
+  --nav-height: 72px;
+  --radius-card: 20px;
+  --radius-pill: 999px;
+}

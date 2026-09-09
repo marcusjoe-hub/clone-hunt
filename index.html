@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clone Hunt: Hide &amp; Seek — Official Roblox Game</title>
+  <meta name="description" content="Every player gets identical clones. Even the Seeker. Nobody is what they seem. Play Clone Hunt: Hide &amp; Seek — the Roblox hide &amp; seek game with 90-second rounds and pure paranoia." />
+  <meta name="theme-color" content="#0a0a12" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Clone Hunt: Hide &amp; Seek" />
+  <meta property="og:description" content="Every player gets identical clones. Even the Seeker. Nobody is what they seem." />
+  <meta property="og:url" content="https://www.roblox.com/games/131083771121188/Key-Hunt" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%95%B5%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+
+  <!-- Google Fonts preconnect (fonts are @imported from css/variables.css) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/updates.css" />
+  <link rel="stylesheet" href="css/player.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <!-- No-JS fallback: never trap content behind the preloader or reveal styles -->
+  <noscript>
+    <style>
+      .preloader { display: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .faq-answer { max-height: none !important; }
+    </style>
+  </noscript>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       PRELOADER
+       ══════════════════════════════════════════════ -->
+  <div class="preloader" id="preloader" role="status" aria-label="Loading Clone Hunt">
+    <div class="preloader-text glitch" data-text="FIND THE REAL ONE...">FIND THE REAL ONE...</div>
+    <div class="preloader-bar">
+      <div class="preloader-fill"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       NAV
+       ══════════════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="Clone Hunt — back to top">CLONE HUNT</a>
+
+      <div class="nav-right">
+        <ul class="nav-links" id="navLinks">
+          <li><a class="nav-link" href="#twists">Twists</a></li>
+          <li><a class="nav-link" href="#how">How to Play</a></li>
+          <li><a class="nav-link" href="#updates">Updates</a></li>
+          <li><a class="nav-link nav-link-cta" href="#play">Play Now</a></li>
+        </ul>
+
+        <button class="music-toggle-btn" id="musicToggle" type="button" aria-label="Toggle music" title="Toggle music">🔇</button>
+
+        <button class="hamburger" id="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════
+       HERO
+       ══════════════════════════════════════════════ -->
+  <header class="hero" id="home">
+    <canvas id="particles" aria-hidden="true"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-badge">🕵️ ROBLOX HIDE &amp; SEEK</div>
+
+      <h1 class="hero-title">
+        <span class="line1">CLONE HUNT</span>
+        <span class="line2">HIDE &amp; SEEK</span>
+      </h1>
+
+      <p class="hero-sub">Every player gets identical clones. Even the Seeker. Nobody is what they seem.</p>
+
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href="https://www.roblox.com/games/131083771121188/Key-Hunt" target="_blank" rel="noopener noreferrer">▶ Play on Roblox</a>
+        <a class="btn btn-secondary" href="#twists">Learn More</a>
+      </div>
+    </div>
+
+    <div class="clone-row" aria-hidden="true">
+      <div class="clone-figure"></div>
+      <div class="clone-figure"></div>
+      <div class="clone-figure clone-real"></div>
+      <div class="clone-figure"></div>
+      <div class="clone-figure"></div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       MARQUEE TICKER
+       ══════════════════════════════════════════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-inner">
+      <div class="marquee-group">
+        <span class="marquee-text">⚡ 90 SECONDS ⚡ NOBODY IS WHAT THEY SEEM ⚡ EVEN THE SEEKER HAS CLONES ⚡ TRUST NO ONE ⚡ FIND THE REAL ONE ⚡</span>
+        <span class="marquee-text">⚡ 90 SECONDS ⚡ NOBODY IS WHAT THEY SEEM ⚡ EVEN THE SEEKER HAS CLONES ⚡ TRUST NO ONE ⚡ FIND THE REAL ONE ⚡</span>
+        <span class="marquee-text">⚡ 90 SECONDS ⚡ NOBODY IS WHAT THEY SEEM ⚡ EVEN THE SEEKER HAS CLONES ⚡ TRUST NO ONE ⚡ FIND THE REAL ONE ⚡</span>
+      </div>
+      <div class="marquee-group">
+        <span class="marquee-text">⚡ 90 SECONDS ⚡ NOBODY IS WHAT THEY SEEM ⚡ EVEN THE SEEKER HAS CLONES ⚡ TRUST NO ONE ⚡ FIND THE REAL ONE ⚡</span>
+        <span class="marquee-text">⚡ 90 SECONDS ⚡ NOBODY IS WHAT THEY SEEM ⚡ EVEN THE SEEKER HAS CLONES ⚡ TRUST NO ONE ⚡ FIND THE REAL ONE ⚡</span>
+        <span class="marquee-text">⚡ 90 SECONDS ⚡ NOBODY IS WHAT THEY SEEM ⚡ EVEN THE SEEKER HAS CLONES ⚡ TRUST NO ONE ⚡ FIND THE REAL ONE ⚡</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       COUNTDOWN BAR
+       ══════════════════════════════════════════════ -->
+  <section class="countdown-banner reveal" aria-label="Round length demo timer">
+    <div class="container countdown-inner">
+      <div class="timer" id="timer">1:30</div>
+      <p class="countdown-text">That's all the time you get to hide, hunt &amp; survive.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       THE TWISTS
+       ══════════════════════════════════════════════ -->
+  <section class="section twists" id="twists">
+    <div class="container">
+      <span class="section-label reveal">THE TWISTS</span>
+      <h2 class="section-title reveal">Nothing Is What It Seems</h2>
+      <p class="section-desc reveal">Three brutal mechanics that turn classic Hide &amp; Seek into pure paranoia.</p>
+
+      <div class="twists-grid">
+        <article class="twist-card reveal">
+          <div class="twist-icon twist-icon-purple" aria-hidden="true">👥</div>
+          <h3 class="twist-title">Identical Clones</h3>
+          <p class="twist-text">Every player spawns with clones sharing the exact same avatar, clothes, and appearance.</p>
+        </article>
+
+        <article class="twist-card reveal">
+          <div class="twist-icon twist-icon-red" aria-hidden="true">🕵️</div>
+          <h3 class="twist-title">The Seeker Has Clones Too</h3>
+          <p class="twist-text">Even if you figure out the Seeker's avatar, multiple identical copies run around. Which one is real?</p>
+        </article>
+
+        <article class="twist-card reveal">
+          <div class="twist-icon twist-icon-green" aria-hidden="true">⏱️</div>
+          <h3 class="twist-title">90-Second Rounds</h3>
+          <p class="twist-text">Each round lasts only 1:30. No time to second-guess.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       HOW TO PLAY
+       ══════════════════════════════════════════════ -->
+  <section class="section how" id="how">
+    <div class="container">
+      <span class="section-label reveal">HOW TO PLAY</span>
+      <h2 class="section-title reveal">Survive in 4 Steps</h2>
+
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step-num">01</span>
+          <h3 class="step-title">Spawn In</h3>
+          <p class="step-text">You and your clones drop into the map. Everyone looks familiar.</p>
+        </div>
+
+        <div class="step reveal">
+          <span class="step-num">02</span>
+          <h3 class="step-title">Hide or Hunt</h3>
+          <p class="step-text">Hiders blend with clones. The Seeker uses theirs to confuse.</p>
+        </div>
+
+        <div class="step reveal">
+          <span class="step-num">03</span>
+          <h3 class="step-title">Read Movement</h3>
+          <p class="step-text">Clones follow patterns. Real players don't. Watch closely.</p>
+        </div>
+
+        <div class="step reveal">
+          <span class="step-num">04</span>
+          <h3 class="step-title">Survive 90s</h3>
+          <p class="step-text">Outlast the clock or catch every hider. Round ends fast.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       UPDATES
+       ══════════════════════════════════════════════ -->
+  <section class="section updates" id="updates">
+    <div class="container">
+      <span class="section-label reveal">UPDATES</span>
+      <h2 class="section-title reveal">Patch Notes</h2>
+
+      <div class="timeline" id="updates-timeline">
+        <!-- Entries rendered by js/updates-render.js from js/updates-data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       GALLERY
+       ══════════════════════════════════════════════ -->
+  <section class="section gallery" id="gallery">
+    <div class="container">
+      <span class="section-label reveal">GALLERY</span>
+      <h2 class="section-title reveal">In-Game Screenshots</h2>
+
+      <div class="gallery-grid">
+        <div class="gallery-item reveal"><span>📸 Coming Soon</span></div>
+        <div class="gallery-item reveal"><span>📸 Coming Soon</span></div>
+        <div class="gallery-item reveal"><span>📸 Coming Soon</span></div>
+        <div class="gallery-item reveal"><span>📸 Coming Soon</span></div>
+        <div class="gallery-item reveal"><span>📸 Coming Soon</span></div>
+        <div class="gallery-item reveal"><span>📸 Coming Soon</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FAQ
+       ══════════════════════════════════════════════ -->
+  <section class="section faq" id="faq">
+    <div class="container faq-container">
+      <span class="section-label reveal">FAQ</span>
+      <h2 class="section-title reveal">Got Questions?</h2>
+
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span class="faq-q-text">How do I tell real players from clones?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Watch movement patterns. Clones follow predictable paths. Real players hesitate, change direction, and react to their surroundings.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span class="faq-q-text">What happens when the timer hits 0:00?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>The round ends immediately. If the Seeker hasn't found all hiders, the hiders win. If all hiders are caught, the Seeker wins.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span class="faq-q-text">Does the Seeker know who the real players are?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>No! The Seeker sees the same chaos as everyone else. Their clones also confuse them. It's a game of instinct and observation.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span class="faq-q-text">Can I play with friends?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Yes! Jump into the same server and try to spot each other among the clones. Just don't accidentally report your friend to the Seeker.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FINAL CTA
+       ══════════════════════════════════════════════ -->
+  <section class="cta-section" id="play">
+    <div class="cta-content reveal">
+      <h2 class="cta-title">Can You Find the Real One?</h2>
+      <p class="cta-text">Jump in. 90 seconds. Dozens of clones. Zero trust.</p>
+      <a class="btn btn-primary" href="https://www.roblox.com/games/131083771121188/Key-Hunt" target="_blank" rel="noopener noreferrer">▶ Play on Roblox</a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════════ -->
+  <footer class="footer">
+    <p class="footer-line">Clone Hunt: Hide &amp; Seek — A Roblox experience.</p>
+    <p class="footer-line">Built by ByteCraft 8D 🧬</p>
+    <p class="footer-line">Not affiliated with Roblox Corporation.</p>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════
+       FLOATING UI — MUSIC PLAYER
+       ══════════════════════════════════════════════ -->
+  <div class="music-player" id="musicPlayer" role="region" aria-label="Music player">
+    <div class="visualizer-bars" id="visualizer" aria-hidden="true">
+      <span class="vbar"></span>
+      <span class="vbar"></span>
+      <span class="vbar"></span>
+      <span class="vbar"></span>
+      <span class="vbar"></span>
+    </div>
+
+    <div class="player-controls">
+      <button class="play-btn" id="playBtn" type="button" aria-label="Play music">▶</button>
+      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" step="1" value="50" aria-label="Volume" />
+    </div>
+
+    <p class="player-status" id="playerStatus">Ambient Loop — press play</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       FLOATING UI — BACK TO TOP
+       ══════════════════════════════════════════════ -->
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="12 19 12 5"></polyline><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </button>
+
+  <!-- ══════════════════════════════════════════════
+       SCRIPTS (ES Modules)
+       ══════════════════════════════════════════════ -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

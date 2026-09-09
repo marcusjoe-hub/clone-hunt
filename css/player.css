@@ -1,0 +1,181 @@
+/* ══════════════════════════════════════════════════════════════
+   CLONE HUNT: HIDE & SEEK — player.css
+   Floating glass music player: play button, volume slider,
+   5-bar Web Audio visualizer, status line.
+   ══════════════════════════════════════════════════════════════ */
+
+.music-player {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 240px;
+  padding: 1rem 1.1rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  animation: player-enter 0.5s var(--ease-smooth) 2.9s both;
+  transition: opacity 0.4s var(--ease-smooth),
+              transform 0.4s var(--ease-smooth),
+              border-color 0.3s var(--ease-smooth);
+}
+
+@keyframes player-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.music-player:hover {
+  border-color: rgba(167, 139, 250, 0.25);
+}
+
+/* ── Visualizer ────────────────────────────────────────────── */
+.visualizer-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+}
+
+.vbar {
+  width: 10px;
+  min-height: 3px;
+  height: 14%;
+  border-radius: 3px 3px 2px 2px;
+  background: linear-gradient(180deg, var(--green-toxic), var(--purple-clone));
+  transition: height 0.12s linear;
+}
+
+.music-player.playing .vbar {
+  box-shadow: 0 0 8px var(--green-glow);
+}
+
+/* ── Controls ──────────────────────────────────────────────── */
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.play-btn {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  background: linear-gradient(135deg, var(--purple-deep), var(--purple-clone));
+  color: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-smooth),
+              box-shadow var(--duration-fast) var(--ease-smooth),
+              opacity var(--duration-fast) var(--ease-smooth);
+}
+
+.play-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 18px var(--purple-glow);
+}
+
+.play-btn:active {
+  transform: scale(0.96);
+}
+
+.play-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Volume slider ─────────────────────────────────────────── */
+.volume-slider {
+  /* --fill is kept in sync with the slider value by js/music.js */
+  --fill: 50%;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg,
+    var(--purple-clone) var(--fill),
+    rgba(255, 255, 255, 0.12) var(--fill));
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 50%;
+  background: var(--green-toxic);
+  box-shadow: 0 0 8px var(--green-glow);
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 50%;
+  background: var(--green-toxic);
+  box-shadow: 0 0 8px var(--green-glow);
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.volume-slider::-moz-range-progress {
+  height: 4px;
+  border-radius: 4px;
+  background: var(--purple-clone);
+}
+
+.volume-slider:focus-visible {
+  outline: 2px solid var(--purple-clone);
+  outline-offset: 4px;
+}
+
+/* ── Status line ───────────────────────────────────────────── */
+.player-status {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: center;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.3s var(--ease-smooth);
+}
+
+.music-player.playing .player-status {
+  color: var(--green-toxic);
+}
+
+.player-status.error {
+  color: var(--amber-warn);
+}
