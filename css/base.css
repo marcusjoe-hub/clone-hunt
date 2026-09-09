@@ -1,0 +1,189 @@
+/* ══════════════════════════════════════════════════════════════
+   CLONE HUNT: HIDE & SEEK — base.css
+   Reset, document defaults, scrollbar, reveal utility, preloader.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Document ──────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-void);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Offset anchored sections so the fixed nav never covers headings */
+section[id],
+header[id] {
+  scroll-margin-top: calc(var(--nav-height) + 18px);
+}
+
+/* ── Text selection ────────────────────────────────────────── */
+::selection {
+  background: var(--purple-clone);
+  color: #ffffff;
+}
+
+/* ── Custom scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--purple-clone);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--purple-deep);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--purple-clone) var(--bg-void);
+}
+
+/* ── Layout container ──────────────────────────────────────── */
+.container {
+  width: min(1140px, 92%);
+  margin-inline: auto;
+}
+
+/* ── Scroll-reveal utility ─────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ════════════════════════════════════════════════════════════
+   PRELOADER
+   ════════════════════════════════════════════════════════════ */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.25rem;
+  background: var(--bg-void);
+  transition: opacity 0.5s ease;
+}
+
+.preloader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.preloader-text {
+  position: relative;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 4vw, 1.8rem);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-align: center;
+  padding-inline: 1rem;
+}
+
+/* Glitch effect: two clipped, offset copies in red and cyan */
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  padding-inline: 1rem;
+  text-align: center;
+  background: transparent;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.glitch::before {
+  color: var(--red-danger);
+  text-shadow: 2px 0 var(--red-glow);
+  animation: glitch-slice-1 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  color: #22d3ee;
+  text-shadow: -2px 0 rgba(34, 211, 238, 0.5);
+  animation: glitch-slice-2 1.6s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-slice-1 {
+  0%   { clip-path: inset(10% 0 78% 0); transform: translate(-2px, -1px); }
+  20%  { clip-path: inset(42% 0 40% 0); transform: translate(2px, 1px); }
+  40%  { clip-path: inset(70% 0 12% 0); transform: translate(-1px, 0); }
+  60%  { clip-path: inset(25% 0 60% 0); transform: translate(1px, -1px); }
+  80%  { clip-path: inset(55% 0 30% 0); transform: translate(-2px, 1px); }
+  100% { clip-path: inset(5% 0 85% 0);  transform: translate(2px, 0); }
+}
+
+@keyframes glitch-slice-2 {
+  0%   { clip-path: inset(65% 0 15% 0); transform: translate(2px, 1px); }
+  20%  { clip-path: inset(15% 0 70% 0); transform: translate(-2px, -1px); }
+  40%  { clip-path: inset(40% 0 45% 0); transform: translate(1px, 1px); }
+  60%  { clip-path: inset(80% 0 5% 0);  transform: translate(-1px, 0); }
+  80%  { clip-path: inset(30% 0 55% 0); transform: translate(2px, -1px); }
+  100% { clip-path: inset(50% 0 35% 0); transform: translate(-2px, 1px); }
+}
+
+/* Loading bar — fills left to right over 2s */
+.preloader-bar {
+  width: min(280px, 60vw);
+  height: 3px;
+  background: var(--border-subtle);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.preloader-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--purple-clone), var(--green-toxic));
+  box-shadow: 0 0 12px var(--purple-glow);
+  animation: preloader-load 2s ease forwards;
+}
+
+@keyframes preloader-load {
+  from { width: 0%; }
+  to   { width: 100%; }
+}

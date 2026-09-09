@@ -1,0 +1,19 @@
+# Audio files (too large for GitHub)
+*.mp3
+*.wav
+*.ogg
+*.m4a
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Misc
+*.log
+node_modules/

@@ -1,0 +1,120 @@
+/* ══════════════════════════════════════════════════════════════
+   CLONE HUNT: HIDE & SEEK — updates.css
+   Vertical patch-notes timeline: left border line, glowing dots,
+   glass cards that slide in from the left on scroll.
+   ══════════════════════════════════════════════════════════════ */
+
+.timeline {
+  position: relative;
+  max-width: 720px;
+  margin: var(--space-lg) auto 0;
+}
+
+/* The vertical line */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--purple-deep), var(--purple-clone));
+  box-shadow: 0 0 8px var(--purple-glow);
+}
+
+.timeline-entry {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: var(--space-lg);
+}
+
+.timeline-entry:last-child {
+  margin-bottom: 0;
+}
+
+/* Timeline entries slide in from the LEFT instead of from below */
+.timeline-entry.reveal {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.timeline-entry.reveal.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* The dot on the line — purple circle with a green glow */
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 1.9rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--purple-clone);
+  box-shadow: 0 0 10px var(--green-glow), 0 0 22px rgba(6, 214, 160, 0.2);
+}
+
+/* The glass card */
+.timeline-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 1.75rem 2rem;
+  transition: border-color 0.3s var(--ease-smooth),
+              box-shadow 0.3s var(--ease-smooth),
+              transform 0.3s var(--ease-smooth);
+}
+
+.timeline-card:hover {
+  border-color: rgba(167, 139, 250, 0.35);
+  box-shadow: 0 10px 30px rgba(138, 92, 246, 0.15);
+  transform: translateX(4px);
+}
+
+.timeline-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.version {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  background: rgba(124, 58, 237, 0.15);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  color: var(--purple-clone);
+}
+
+.date {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.timeline-card .title {
+  margin-bottom: 0.55rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+}
+
+.timeline-card .body {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
