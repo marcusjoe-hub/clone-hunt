@@ -1,12 +1,16 @@
 /* ══════════════════════════════════════════════════════════════
    CLONE HUNT: HIDE & SEEK — music.js
-   Floating music player:
-   - Audio element (assets/audio/ambient-loop.mp3, looped)
-   - Web Audio API graph: source → AnalyserNode → destination
-   - 5 visualizer bars driven by analyser frequency data (rAF)
-   - Play/pause on user interaction only (no autoplay)
-   - Volume slider persisted to localStorage "clonehunt-volume"
-   - Gracefully handles a missing audio file ("No track loaded")
+   Floating music player (iOS Safari safe):
+   - The Audio element is created up front, but the Web Audio graph
+     is NOT — iOS Safari blocks the AudioContext until a user
+     interaction, so the context stays null until the first click.
+   - AudioContext + AnalyserNode are created inside the FIRST play
+     button click; if the context is 'suspended', it is resumed.
+   - If playback is blocked, the status shows "Tap to allow audio"
+     instead of failing completely; a genuinely missing file still
+     degrades gracefully to "No track loaded" (button disabled).
+   - 5 visualizer bars driven by analyser frequency data (rAF).
+   - Volume slider persisted to localStorage "clonehunt-volume".
    ══════════════════════════════════════════════════════════════ */
 
 const AUDIO_SRC = 'assets/audio/ambient-loop.mp3';
@@ -23,11 +27,15 @@ export function initMusic() {
   const playerEl = document.getElementById('musicPlayer');
   const bars = Array.from(document.querySelectorAll('.vbar'));
 
-  /* ── Audio element ───────────────────────────────────────── */
+  /* ── Audio element (safe to create immediately) ──────────── */
   const audio = new Audio(AUDIO_SRC);
   audio.loop = true;
   audio.preload = 'auto';
 
+  /* Web Audio graph — deliberately NOT created here. iOS Safari
+     suspends any AudioContext that is not created (or resumed)
+     inside a user gesture, so these stay null until the first
+     play-button click in toggleMusic() below. */
   let audioCtx = null;
   let analyser = null;
   let sourceNode = null;
@@ -114,6 +122,8 @@ export function initMusic() {
   audio.addEventListener('error', markUnavailable);
 
   /* ── Web Audio graph: source → analyser → destination ────── */
+  /* Called ONLY from inside the first play click (user gesture),
+     never at page load — that is the iOS Safari requirement. */
   function setupAudioGraph() {
     if (audioCtx) return;
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -158,7 +168,7 @@ export function initMusic() {
         bars[i].style.height = `${height}%`;
       }
     } else {
-      /* Idle: gently decay to the resting height */
+      /* Idle (or analyser not created yet): decay to resting height */
       for (let i = 0; i < bars.length; i += 1) {
         const current = parseFloat(bars[i].style.height);
         const base = Number.isNaN(current) ? IDLE_BAR_HEIGHT : current;
@@ -168,7 +178,7 @@ export function initMusic() {
     }
   }
 
-  /* ── Play / pause (user interaction only — no autoplay) ──── */
+  /* ── Play / pause ────────────────────────────────────────── */
   function setPlayingState(playing) {
     isPlaying = playing;
 
@@ -193,14 +203,17 @@ export function initMusic() {
       return;
     }
 
-    /* Build the analyser graph lazily, inside the user gesture */
+    /* FIRST user interaction: build the Web Audio graph now.
+       This is the only place the AudioContext is ever created. */
     setupAudioGraph();
 
+    /* iOS suspends contexts — wake it up inside this gesture */
     if (audioCtx && audioCtx.state === 'suspended') {
       try {
         await audioCtx.resume();
       } catch (err) {
-        /* resume can reject if the gesture expired — play() will surface it */
+        /* resume can reject if the gesture expired — play() below
+           surfaces the problem to the user instead of crashing */
       }
     }
 
@@ -209,8 +222,15 @@ export function initMusic() {
       setPlayingState(true);
       setStatus('Now Playing — Ambient Loop');
     } catch (err) {
-      /* Playback failed (missing/blocked file) — degrade gracefully */
-      markUnavailable();
+      if (err && (err.name === 'NotAllowedError' || err.name === 'SecurityError')) {
+        /* Autoplay policy blocked us (e.g. iOS Safari) — invite
+           another tap instead of failing completely */
+        setPlayingState(false);
+        setStatus('Tap to allow audio', true);
+      } else {
+        /* Track genuinely unplayable (missing/corrupt file) */
+        markUnavailable();
+      }
     }
   }
 
