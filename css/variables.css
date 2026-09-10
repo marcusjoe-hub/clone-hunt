@@ -1,27 +1,28 @@
 /* ══════════════════════════════════════════════════════════════
    CLONE HUNT: HIDE & SEEK — variables.css
    Design tokens: colors, fonts, spacing, motion.
+   Theme: SUNSET WAVE (Orange / Hot Pink / Synth Purple).
    ══════════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600;700&display=swap');
 
 :root {
   /* ── Colors ─────────────────────────────────────────────── */
-  --bg-void: #0a0a12;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --border-subtle: rgba(255, 255, 255, 0.06);
+  --bg-void: #0f0514;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --border-subtle: rgba(255, 0, 127, 0.15);
 
-  --purple-clone: #a78bfa;
-  --purple-deep: #7c3aed;
-  --purple-glow: rgba(138, 92, 246, 0.4);
+  /* Color Swaps to Sunset Wave */
+  --purple-clone: #FF8C00; /* Now Orange */
+  --purple-deep: #FF007F;  /* Now Hot Pink */
+  --purple-glow: rgba(255, 140, 0, 0.4);
 
-  --green-toxic: #06d6a0;
-  --green-glow: rgba(6, 214, 160, 0.3);
+  --green-toxic: #a78bfa; /* Now Synth Purple */
+  --green-glow: rgba(167, 139, 250, 0.3);
 
-  --red-danger: #ef4444;
-  --red-glow: rgba(239, 68, 68, 0.5);
-
-  --amber-warn: #f59e0b;
+  --red-danger: #ff3366;
+  --red-glow: rgba(255, 51, 102, 0.5);
+  --amber-warn: #FF8C00;
 
   --text-primary: #e0e0f0;
   --text-muted: #8888aa;
