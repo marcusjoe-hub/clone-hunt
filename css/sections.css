@@ -332,6 +332,11 @@
               box-shadow 0.25s var(--ease-smooth);
 }
 
+/* Real screenshots (js/gallery-render.js) zoom slightly on hover */
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
 @keyframes gradient-shift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
